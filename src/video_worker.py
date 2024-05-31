@@ -37,15 +37,17 @@ class VideoWorker():
             self.duration = video.duration
             self.pixels_tall = video.size[1]
 
-            self.translate_audio_to_spanish(audio_file)
+            self.translated_text = self.translate_audio_to_spanish(audio_file)
             self.image_data = self.get_text_from_image(video)
         return {'url': self.url, 'duration': self.duration, 
-        'pixelsTall': self.pixels_tall, 'image': self.image_data}
+        'pixelsTall': self.pixels_tall, 'image': self.image_data, 
+        'translated_text': self.translated_text}
     
     @classmethod
     def get_cached_data(self):
         return {'url': self.url, 'duration': self.duration, 
-        'pixelsTall': self.pixels_tall, 'image': self.image_data}
+        'pixelsTall': self.pixels_tall, 'image': self.image_data, 
+        'translated_text': self.translated_text  }
 
     def get_cut_video(startTime, endTime, video):
         clip = video.subclip(startTime, endTime)
@@ -67,6 +69,8 @@ class VideoWorker():
         translation = translator.translate(text, dest='ca')
         speak = gTTS(text=translation.text, lang='ca', slow=False) 
         speak.save(cutted_audio_translated_name)
+
+        return translation.text
 
          
 
