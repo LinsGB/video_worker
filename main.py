@@ -34,3 +34,13 @@ async def get_original_audio():
 async def get_translated_audio():
     VideoWorker.stream_original_audio()
     return StreamingResponse(VideoWorker.stream_translated_audio(), media_type="audio/mpeg")
+
+@app.get("/download/original_audio")
+async def get_original_audio():
+    VideoWorker.stream_original_audio()
+    return StreamingResponse(VideoWorker.stream_original_audio(), media_type="audio/mpeg", headers={'Content-Disposition': 'attachment', 'filename':'original.mp3', 'Content-Type': 'audio/mpeg'})
+
+@app.get("/download/translated_audio")
+async def get_translated_audio():
+    VideoWorker.stream_original_audio()
+    return StreamingResponse(VideoWorker.stream_translated_audio(), media_type="audio/mpeg", headers={'Content-Disposition': 'attachment', 'filename':'translated.mp3', 'Content-Type': 'audio/mpeg'})
