@@ -66,8 +66,8 @@ class VideoWorker():
             file.write(original_audio.get_wav_data())
 
         text = r.recognize_google(original_audio)
-        translation = translator.translate(text, dest='ca')
-        speak = gTTS(text=translation.text, lang='ca', slow=False) 
+        translation = translator.translate(text, dest='es')
+        speak = gTTS(text=translation.text, lang='es', slow=False) 
         speak.save(cutted_audio_translated_name)
 
         return translation.text
