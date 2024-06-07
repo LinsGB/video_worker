@@ -87,7 +87,7 @@ class VideoWorker():
 
     def get_text_from_image(clip):
         #Checkpoint 7
-        clip.save_frame(first_frame_name)
+        clip.save_frame(first_frame_name, 2 )
         img = Image.open(first_frame_name)
         text = pytesseract.image_to_string(img)
 
